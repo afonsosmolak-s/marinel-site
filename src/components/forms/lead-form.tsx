@@ -1,0 +1,221 @@
+"use client";
+
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import { submitLead } from "@/app/actions/lead";
+import {
+  EXPERIENCE_LEVELS,
+  leadSchema,
+  type LeadFormValues,
+} from "@/lib/validations/lead";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import type { Course, Masterclass } from "@/types/content";
+
+export function LeadForm({
+  courses,
+  masterclasses,
+  defaultCourse,
+}: {
+  courses: Course[];
+  masterclasses: Masterclass[];
+  defaultCourse?: string;
+}) {
+  const [submitted, setSubmitted] = useState(false);
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<LeadFormValues>({
+    resolver: zodResolver(leadSchema),
+    defaultValues: {
+      fullName: "",
+      phone: "",
+      email: "",
+      city: "",
+      courseInterest: defaultCourse ?? "",
+      experienceLevel: "",
+      goal: "",
+      message: "",
+    },
+  });
+
+  async function onSubmit(values: LeadFormValues) {
+    const result = await submitLead(values);
+    if (result.success) {
+      toast.success(
+        "¡Gracias! Marinel revisará tu solicitud y te contactará muy pronto.",
+      );
+      reset();
+      setSubmitted(true);
+    } else {
+      toast.error(result.error);
+    }
+  }
+
+  if (submitted) {
+    return (
+      <div className="rounded-3xl border border-border bg-warm p-10 text-center">
+        <p className="font-heading text-2xl text-foreground italic">
+          Solicitud enviada
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          Marinel revisará tu nivel y objetivo, y te escribirá por WhatsApp o
+          email para confirmar los detalles y la forma de pago.
+        </p>
+        <Button
+          variant="outline"
+          className="mt-6 h-auto rounded-full px-6 py-2.5"
+          onClick={() => setSubmitted(false)}
+        >
+          Enviar otra solicitud
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="grid grid-cols-1 gap-5 sm:grid-cols-2"
+    >
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="fullName">Nombre completo</Label>
+        <Input id="fullName" {...register("fullName")} />
+        {errors.fullName && (
+          <p className="text-xs text-destructive">
+            {errors.fullName.message}
+          </p>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="phone">Teléfono / WhatsApp</Label>
+        <Input id="phone" type="tel" {...register("phone")} />
+        {errors.phone && (
+          <p className="text-xs text-destructive">{errors.phone.message}</p>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="email">Email</Label>
+        <Input id="email" type="email" {...register("email")} />
+        {errors.email && (
+          <p className="text-xs text-destructive">{errors.email.message}</p>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="city">Ciudad</Label>
+        <Input id="city" {...register("city")} />
+        {errors.city && (
+          <p className="text-xs text-destructive">{errors.city.message}</p>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="courseInterest">Curso de interés</Label>
+        <Controller
+          control={control}
+          name="courseInterest"
+          render={({ field }) => (
+            <Select value={field.value} onValueChange={field.onChange}>
+              <SelectTrigger id="courseInterest" className="w-full">
+                <SelectValue placeholder="Selecciona un curso" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Cursos</SelectLabel>
+                  {courses.map((course) => (
+                    <SelectItem key={course.id} value={course.title}>
+                      {course.title}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+                {masterclasses.length > 0 && (
+                  <SelectGroup>
+                    <SelectLabel>Masterclasses</SelectLabel>
+                    {masterclasses.map((masterclass) => (
+                      <SelectItem
+                        key={masterclass.id}
+                        value={masterclass.title}
+                      >
+                        {masterclass.title}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                )}
+                <SelectItem value="Aún no lo sé">Aún no lo sé</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
+        {errors.courseInterest && (
+          <p className="text-xs text-destructive">
+            {errors.courseInterest.message}
+          </p>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="experienceLevel">Nivel de experiencia</Label>
+        <Controller
+          control={control}
+          name="experienceLevel"
+          render={({ field }) => (
+            <Select value={field.value} onValueChange={field.onChange}>
+              <SelectTrigger id="experienceLevel" className="w-full">
+                <SelectValue placeholder="Selecciona tu nivel" />
+              </SelectTrigger>
+              <SelectContent>
+                {EXPERIENCE_LEVELS.map((level) => (
+                  <SelectItem key={level} value={level}>
+                    {level}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+        {errors.experienceLevel && (
+          <p className="text-xs text-destructive">
+            {errors.experienceLevel.message}
+          </p>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-1.5 sm:col-span-2">
+        <Label htmlFor="goal">¿Qué te gustaría conseguir con el curso?</Label>
+        <Input id="goal" {...register("goal")} />
+      </div>
+
+      <div className="flex flex-col gap-1.5 sm:col-span-2">
+        <Label htmlFor="message">Mensaje (opcional)</Label>
+        <Textarea id="message" rows={4} {...register("message")} />
+      </div>
+
+      <Button
+        type="submit"
+        disabled={isSubmitting}
+        className="btn-sweep h-auto w-fit rounded-full bg-primary px-7 py-3.5 text-base text-primary-foreground hover:bg-primary/85 sm:col-span-2"
+      >
+        {isSubmitting ? "Enviando..." : "Solicitar información"}
+      </Button>
+    </form>
+  );
+}

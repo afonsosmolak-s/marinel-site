@@ -1,0 +1,33 @@
+{
+  "heroEyebrow": "CHEF & PASTELERÍA",
+  "heroTitle": "Convierte tu pasión por la repostería en un",
+  "heroTitleAccent": "oficio",
+  "heroSubtitle": "Cursos, masterclasses y clases privadas de la mano de Marinel, chef pastelera dedicada a formar a nuevas generaciones de reposteras.",
+  "heroImageUrl": "/uploads/hero/1783463061134-zawz5n.jpeg",
+  "heroImagePosition": {
+    "focalX": 0,
+    "focalY": 49,
+    "zoom": 1.1
+  },
+  "aboutTitle": "Mucho más que",
+  "aboutTitleAccent": "una pastelería",
+  "aboutBody": [
+    "Marinel lleva más de una década entre harinas, cremas y láminas de chocolate, perfeccionando un oficio que aprendió con paciencia y que hoy enseña con la misma dedicación.",
+    "Cada curso nace de la misma idea: la pastelería no se trata solo de técnica, sino de encontrar tu propio estilo. Por eso sus clases combinan fundamentos sólidos con espacio para la creatividad de cada alumna.",
+    "Hoy combina la creación de tartas a medida para momentos únicos con la formación de nuevas reposteras, uniendo dos pasiones que, en realidad, siempre fueron una sola."
+  ],
+  "aboutImageUrl": "/uploads/about/1783463087361-tie2i8.jpeg",
+  "aboutImagePosition": null,
+  "instagramUrl": "https://instagram.com/tartasmarinel",
+  "tiktokUrl": "https://www.tiktok.com/@chefpasteleramarinel",
+  "whatsappUrl": "https://wa.me/34644043294",
+  "whatsappNumber": "+34 644 04 32 94",
+  "communityUrl": "https://chat.whatsapp.com/CDBunMvZTHbLMfETVENMDI",
+  "phone": "+34 644 04 32 94",
+  "email": "hola@marinelpasteleria.com",
+  "city": "Elche",
+  "address": "Calle José Díez Mora, 65, 03205 Elche, Alicante, España",
+  "mapEmbedUrl": "https://www.google.com/maps?q=Calle+Jos%C3%A9+D%C3%ADez+Mora+65,+03205+Elche,+Alicante,+Espa%C3%B1a&output=embed",
+  "seoTitle": "Marinel Pastelería | Cursos y Masterclasses de Repostería",
+  "seoDescription": "Aprende pastelería profesional con Marinel: cursos, masterclasses y clases privadas de tartas de diseño, chantilly y decoración. Reserva tu plaza."
+}

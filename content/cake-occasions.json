@@ -1,0 +1,56 @@
+[
+  {
+    "id": "ocasion-cumpleanos",
+    "name": "Cumpleaños",
+    "orderIndex": 1,
+    "published": true
+  },
+  {
+    "id": "ocasion-boda",
+    "name": "Boda",
+    "orderIndex": 2,
+    "published": true
+  },
+  {
+    "id": "ocasion-bautizo",
+    "name": "Bautizo",
+    "orderIndex": 3,
+    "published": true
+  },
+  {
+    "id": "ocasion-comunion",
+    "name": "Comunión",
+    "orderIndex": 4,
+    "published": true
+  },
+  {
+    "id": "ocasion-baby-shower",
+    "name": "Baby Shower",
+    "orderIndex": 5,
+    "published": true
+  },
+  {
+    "id": "ocasion-revelacion-sexo",
+    "name": "Revelación de sexo",
+    "orderIndex": 6,
+    "published": true
+  },
+  {
+    "id": "ocasion-evento",
+    "name": "Evento",
+    "orderIndex": 7,
+    "published": true
+  },
+  {
+    "name": "Matrimonios",
+    "published": true,
+    "id": "ocasion-mrc1qcv67eaoa",
+    "orderIndex": 8
+  },
+  {
+    "id": "ocasion-otro",
+    "name": "Otro",
+    "orderIndex": 9,
+    "published": true
+  }
+]

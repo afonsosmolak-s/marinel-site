@@ -1,0 +1,42 @@
+[
+  {
+    "title": "CURSO BÁSICO REPOSTERÍA ",
+    "description": "🎂 Aprende las bases de la repostería de forma práctica y crea tu propia tarta durante la formación.\n\n🧁 Incluye todos los materiales necesarios.\n\n\n📖 Recetario impreso.\n\n\n📦 Caja para transportar tu creación.\n\n\n☕ Comida y bebidas.\n\n\n💬 Un mes de asesoramiento personalizado.\n\n\n🏅 Certificado de participación.",
+    "level": "Iniciación",
+    "format": "Presencial",
+    "imageUrl": "/uploads/courses/1783456550661-m7dg14.png",
+    "imagePosition": null,
+    "startDate": "2026-09-15",
+    "availablePlaces": 8,
+    "duration": "5 horas",
+    "badge": null,
+    "price": null,
+    "featured": true,
+    "published": true,
+    "id": "curso-mrb3y913wwhsh",
+    "slug": "curso-basico-reposteria",
+    "orderIndex": 5
+  },
+  {
+    "title": "EBOOK - FUNDAMENTOS DE LA PASTELARÍA",
+    "description": "📖 Aprende desde cero los fundamentos de la pastelería con una metodología clara, práctica y fácil de seguir. 🍰 Descubre técnicas esenciales, consejos profesionales y recetas que te ayudarán a ganar confianza en cada elaboración.\n\n\n👩‍🍳 En este ebook encontrarás explicaciones paso a paso, 🧁 recomendaciones de materiales, ✨ buenas prácticas y pequeños trucos que marcarán la diferencia en tus resultados. Todo el contenido está diseñado para que puedas aprender a tu ritmo, 🏡 desde casa y con total comodidad.\n\n\n🎓 Ideal para principiantes, 💖 aficionados y cualquier persona que quiera iniciarse en el mundo de la pastelería de forma profesional, organizada y con resultados que enamoran.",
+    "level": "Iniciación",
+    "format": "Online",
+    "imageUrl": "/uploads/courses/1783537876675-8bz7ww.png",
+    "imagePosition": {
+      "focalX": 52,
+      "focalY": 47,
+      "zoom": 1.5
+    },
+    "startDate": null,
+    "availablePlaces": null,
+    "duration": "20 horas",
+    "badge": null,
+    "price": "29,90€",
+    "featured": true,
+    "published": true,
+    "id": "curso-mrcfxitp6nexr",
+    "slug": "ebook-fundamentos-de-la-pastelaria",
+    "orderIndex": 6
+  }
+]

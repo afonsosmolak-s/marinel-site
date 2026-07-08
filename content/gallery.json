@@ -1,0 +1,140 @@
+[
+  {
+    "id": "galeria-1",
+    "imageUrl": "/uploads/gallery/1783456123571-4d5kxu.jpeg",
+    "imagePosition": null,
+    "caption": "Tarta personalizada",
+    "categories": [],
+    "orderIndex": 1,
+    "published": true,
+    "featured": true
+  },
+  {
+    "imageUrl": "/uploads/gallery/1783463364639-iwx3ve.jpeg",
+    "imagePosition": null,
+    "caption": "Tarta Rosa ",
+    "categories": [],
+    "published": true,
+    "id": "galeria-mrb81td07fz1u",
+    "orderIndex": 2,
+    "featured": true
+  },
+  {
+    "id": "galeria-4",
+    "imageUrl": "/uploads/gallery/1783455584184-p87srj.jpeg",
+    "imagePosition": null,
+    "caption": "Masterclass en directo",
+    "categories": [],
+    "orderIndex": 3,
+    "published": true,
+    "featured": true
+  },
+  {
+    "imageUrl": "/uploads/gallery/1783463480688-qxie2r.jpeg",
+    "imagePosition": null,
+    "caption": null,
+    "categories": [],
+    "published": true,
+    "id": "galeria-mrb83zd9hy7mu",
+    "orderIndex": 4,
+    "featured": true
+  },
+  {
+    "id": "galeria-8",
+    "imageUrl": "/uploads/gallery/1783457675550-kxjlgr.png",
+    "imagePosition": null,
+    "caption": "Acabado final",
+    "categories": [],
+    "orderIndex": 5,
+    "published": true,
+    "featured": false
+  },
+  {
+    "id": "galeria-2",
+    "imageUrl": "/uploads/gallery/1783455717059-rvhvs2.jpeg",
+    "imagePosition": null,
+    "caption": "Detalle de decoración",
+    "categories": [],
+    "orderIndex": 6,
+    "published": true,
+    "featured": false
+  },
+  {
+    "id": "galeria-3",
+    "imageUrl": "/uploads/gallery/1783455802005-mb12wh.jpeg",
+    "imagePosition": null,
+    "caption": "Proceso en el obrador",
+    "categories": [],
+    "orderIndex": 7,
+    "published": true,
+    "featured": false
+  },
+  {
+    "id": "galeria-5",
+    "imageUrl": "/uploads/gallery/1783456129668-1h4xye.jpeg",
+    "imagePosition": null,
+    "caption": "Postre de temporada",
+    "categories": [],
+    "orderIndex": 8,
+    "published": true,
+    "featured": false
+  },
+  {
+    "imageUrl": "/uploads/gallery/1783463489866-vb4r6n.jpeg",
+    "imagePosition": {
+      "focalX": 45,
+      "focalY": 100,
+      "zoom": 1
+    },
+    "caption": null,
+    "categories": [],
+    "published": true,
+    "id": "galeria-mrb847baoicc5",
+    "orderIndex": 9,
+    "featured": false
+  },
+  {
+    "imageUrl": "/uploads/gallery/1783463502966-w4jlgw.jpeg",
+    "imagePosition": null,
+    "caption": null,
+    "categories": [],
+    "published": true,
+    "id": "galeria-mrb84fc4imi39",
+    "orderIndex": 10,
+    "featured": false
+  },
+  {
+    "imageUrl": "/uploads/gallery/1783463510142-yeurdu.jpeg",
+    "imagePosition": null,
+    "caption": "Tarta Azul",
+    "categories": [],
+    "published": true,
+    "id": "galeria-mrb84v1q6fyeb",
+    "orderIndex": 11,
+    "featured": false
+  },
+  {
+    "imageUrl": "/uploads/gallery/1783463634477-v1xqb9.jpeg",
+    "imagePosition": null,
+    "caption": null,
+    "categories": [],
+    "published": true,
+    "id": "galeria-mrb87am9154t3",
+    "orderIndex": 12,
+    "featured": false
+  },
+  {
+    "imageUrl": "/uploads/gallery/1783466276198-0wvngf.png",
+    "imagePosition": {
+      "focalX": 50,
+      "focalY": 50,
+      "zoom": 1
+    },
+    "caption": null,
+    "categories": [],
+    "published": true,
+    "id": "galeria-mrb9rwsks8ett",
+    "orderIndex": 13,
+    "featured": false
+  }
+]

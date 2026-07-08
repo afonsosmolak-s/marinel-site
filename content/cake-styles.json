@@ -1,0 +1,56 @@
+[
+  {
+    "id": "estilo-infantil",
+    "name": "Infantil",
+    "orderIndex": 1,
+    "published": true
+  },
+  {
+    "id": "estilo-tematica",
+    "name": "Temática",
+    "orderIndex": 2,
+    "published": true
+  },
+  {
+    "id": "estilo-elegante",
+    "name": "Elegante",
+    "orderIndex": 3,
+    "published": true
+  },
+  {
+    "id": "estilo-minimalista",
+    "name": "Minimalista",
+    "orderIndex": 4,
+    "published": true
+  },
+  {
+    "id": "estilo-flores",
+    "name": "Flores",
+    "orderIndex": 5,
+    "published": true
+  },
+  {
+    "id": "estilo-vintage",
+    "name": "Vintage",
+    "orderIndex": 6,
+    "published": true
+  },
+  {
+    "id": "estilo-moderna",
+    "name": "Moderna",
+    "orderIndex": 7,
+    "published": true
+  },
+  {
+    "id": "estilo-personalizada",
+    "name": "Personalizada",
+    "orderIndex": 8,
+    "published": true
+  },
+  {
+    "id": "estilo-otro",
+    "name": "Otro",
+    "orderIndex": 9,
+    "published": true
+  }
+]

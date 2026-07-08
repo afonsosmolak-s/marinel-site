@@ -1,0 +1,46 @@
+[
+  {
+    "id": "testimonio-laura",
+    "authorName": "Laura M.",
+    "authorRole": "Alumna — Tartas de Diseño",
+    "content": "Marinel explica cada paso con una paciencia enorme. Llegué sin saber nada y salí capaz de montar mi primera tarta de tres pisos.",
+    "avatarUrl": "/uploads/testimonials/1783463998707-ypq7dz.jpg",
+    "imagePosition": {
+      "focalX": 50,
+      "focalY": 50,
+      "zoom": 1
+    },
+    "orderIndex": 1,
+    "published": true
+  },
+  {
+    "id": "testimonio-cristina",
+    "authorName": "Cristina R.",
+    "authorRole": "Alumna — Masterclass de Chantilly",
+    "content": "Lo que más valoro es que no se queda en la teoría: cada alumna sale del taller con la técnica realmente dominada.",
+    "avatarUrl": "/uploads/testimonials/1783464005918-vkocc7.avif",
+    "imagePosition": null,
+    "orderIndex": 2,
+    "published": true
+  },
+  {
+    "id": "testimonio-noelia",
+    "authorName": "Noelia P.",
+    "authorRole": "Clienta — tarta de cumpleaños",
+    "content": "Encargué una tarta para un cumpleaños especial y superó todas mis expectativas. Se nota el cuidado en cada detalle.",
+    "avatarUrl": "/uploads/testimonials/1783464011841-i255g7.avif",
+    "imagePosition": null,
+    "orderIndex": 3,
+    "published": true
+  },
+  {
+    "authorName": "Afonso Smolak - Prueba",
+    "authorRole": "Cliente",
+    "content": "(Afonso prueba)",
+    "avatarUrl": null,
+    "imagePosition": null,
+    "published": false,
+    "id": "testimonio-mrb8bnj5dp5nh",
+    "orderIndex": 4
+  }
+]

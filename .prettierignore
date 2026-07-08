@@ -1,0 +1,4 @@
+supabase/migrations
+.next
+node_modules
+content
