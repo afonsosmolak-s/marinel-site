@@ -4,16 +4,17 @@ import { createClient } from "@supabase/supabase-js";
 // so that Turbopack does NOT inline them at build time. They are server-only
 // and are read from process.env at runtime, when Vercel provides the real values.
 
+// Strip BOM, stray quotes and whitespace that sneak in via dashboard copy-paste.
+function clean(value: string | undefined): string {
+  return (value ?? "").trim().replace(/^["']+|["']+$/g, "").trim();
+}
+
 // Public reads — RLS filters to published content (anon key)
 export function createPublicClient() {
-  const url = process.env.SUPABASE_URL!;
-  const key = process.env.SUPABASE_ANON_KEY!;
-  return createClient(url, key);
+  return createClient(clean(process.env.SUPABASE_URL), clean(process.env.SUPABASE_ANON_KEY));
 }
 
 // Admin writes — bypasses RLS (service role, server-side only)
 export function createAdminClient() {
-  const url = process.env.SUPABASE_URL!;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-  return createClient(url, key);
+  return createClient(clean(process.env.SUPABASE_URL), clean(process.env.SUPABASE_SERVICE_ROLE_KEY));
 }
