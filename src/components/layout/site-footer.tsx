@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import type { SiteSettings } from "@/types/content";
 
@@ -12,7 +12,6 @@ const NAV_LINKS = [
   { href: "/#galeria", label: "Galería" },
   { href: "/#tartas", label: "Tartas a Medida" },
   { href: "/#cursos", label: "Cursos" },
-  { href: "/#opiniones", label: "Opiniones" },
   { href: "/#contacto", label: "Contacto" },
 ];
 
@@ -41,12 +40,22 @@ function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+function ColumnTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-xs font-medium tracking-[0.2em] text-brown uppercase">
+      {children}
+    </p>
+  );
+}
+
 export function SiteFooter({ settings }: { settings: SiteSettings }) {
   return (
-    <footer className="border-t border-border bg-footer-bg">
-      <Container className="flex flex-col gap-12 py-16 md:flex-row md:items-start md:justify-between md:py-20">
+    // Línea dorada superior — enlaza el footer con los acentos dorados del sitio
+    <footer className="border-t border-[#c9a84c]/40 bg-footer-bg">
+      <Container className="grid gap-12 py-16 md:grid-cols-[1.3fr_0.8fr_1fr_1fr] md:gap-10 md:py-20">
+        {/* Marca */}
         <div className="max-w-xs">
-          <Link href="/" className="flex flex-col items-center gap-1.5 w-fit">
+          <Link href="/" className="flex w-fit flex-col items-center gap-1.5">
             <Image
               src="/logo.png"
               alt="Marinel Pastelería"
@@ -54,7 +63,7 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
               height={48}
               className="size-12 rounded-full object-cover"
             />
-            <span className="font-heading text-xl font-medium text-foreground italic leading-none">
+            <span className="font-heading text-xl leading-none font-medium text-foreground italic">
               Tartas Marinel
             </span>
           </Link>
@@ -68,54 +77,103 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-pink hover:text-pink-ink"
+              className="flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-[#c9a84c] hover:text-pink-ink"
             >
-              <InstagramIcon className="size-4" />
+              <InstagramIcon className="size-4.5" />
             </a>
             <a
               href={settings.tiktokUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="TikTok"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-pink hover:text-pink-ink"
+              className="flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-[#c9a84c] hover:text-pink-ink"
             >
-              <TikTokIcon className="size-4" />
+              <TikTokIcon className="size-4.5" />
             </a>
             <a
               href={settings.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
-              className="flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-pink hover:text-pink-ink"
+              className="flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-[#c9a84c] hover:text-pink-ink"
             >
-              <MessageCircle className="size-4" strokeWidth={1.5} />
+              <MessageCircle className="size-4.5" strokeWidth={1.5} />
             </a>
           </div>
         </div>
 
-        <nav className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm">
+        {/* Navegación */}
+        <nav className="flex flex-col gap-3">
+          <ColumnTitle>Navegación</ColumnTitle>
           {NAV_LINKS.map((link) => (
             // <a> nativo a propósito: next/link no baja el scroll a un
             // #ancla cuando el pathname no cambia (probado en preview).
             <a
               key={link.href}
               href={link.href}
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              className="w-fit text-sm text-muted-foreground transition-colors hover:text-[#b5677b]"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="text-sm text-muted-foreground">
-          <p>{settings.email}</p>
-          <p className="mt-1">{settings.phone}</p>
+        {/* Contacto */}
+        <div className="flex flex-col gap-3">
+          <ColumnTitle>Contacto</ColumnTitle>
+          <a
+            href={`mailto:${settings.email}`}
+            className="flex w-fit items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-[#b5677b]"
+          >
+            <Mail className="size-3.5 shrink-0" strokeWidth={1.5} />
+            {settings.email}
+          </a>
+          <a
+            href={`tel:${settings.phone.replace(/\s/g, "")}`}
+            className="flex w-fit items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-[#b5677b]"
+          >
+            <Phone className="size-3.5 shrink-0" strokeWidth={1.5} />
+            {settings.phone}
+          </a>
+          <a
+            href={settings.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1 flex w-fit items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/85"
+          >
+            <MessageCircle className="size-3.5" strokeWidth={1.5} />
+            Hablar por WhatsApp
+          </a>
+        </div>
+
+        {/* Visítanos */}
+        <div className="flex flex-col gap-3">
+          <ColumnTitle>Visítanos</ColumnTitle>
+          {(settings.address || settings.city) && (
+            <p className="flex items-start gap-2 text-sm leading-relaxed text-muted-foreground">
+              <MapPin className="mt-0.5 size-3.5 shrink-0" strokeWidth={1.5} />
+              <span>
+                {settings.address}
+                {settings.address && settings.city && <br />}
+                {settings.city}
+              </span>
+            </p>
+          )}
+          <p className="flex items-start gap-2 text-sm leading-relaxed text-muted-foreground">
+            <Clock className="mt-0.5 size-3.5 shrink-0" strokeWidth={1.5} />
+            Pedidos y clases con cita previa
+          </p>
         </div>
       </Container>
 
       <div className="border-t border-border">
-        <Container className="flex flex-col items-center justify-center gap-2 py-6 text-xs text-muted-foreground md:flex-row">
+        {/* La zona derecha recibirá los enlaces legales (aviso legal ·
+            privacidad · cookies) en el go-live — layout ya preparado. */}
+        <Container className="flex flex-col items-center justify-between gap-2 py-6 text-xs text-muted-foreground md:flex-row">
           <p>© {new Date().getFullYear()} Marinel Pastelería</p>
+          <p className="text-muted-foreground/70">
+            Repostería artesanal hecha con cariño
+          </p>
         </Container>
       </div>
     </footer>
