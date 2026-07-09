@@ -40,10 +40,8 @@ export function Courses({
               <div className="group relative h-full">
               <article
                 className={cn(
-                  "relative flex h-full flex-col overflow-hidden rounded-3xl border bg-card shadow-[4px_4px_10px_rgba(0,0,0,0.18),_10px_10px_30px_rgba(0,0,0,0.10)] transition-[transform,box-shadow] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5 group-hover:scale-[1.015] group-hover:shadow-[6px_6px_14px_rgba(0,0,0,0.22),_14px_14px_40px_rgba(0,0,0,0.14)]",
-                  course.featured
-                    ? "border-pink/50 shadow-[0_20px_60px_-24px_rgba(248,183,197,0.4)]"
-                    : "border-border",
+                  "relative flex h-full flex-col overflow-hidden rounded-3xl border bg-card shadow-card transition-all duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5 group-hover:scale-[1.015] group-hover:border-[#c9a84c] group-hover:shadow-card-hover",
+                  course.featured ? "border-pink/50" : "border-border",
                 )}
               >
                 <div className="relative">
@@ -138,7 +136,7 @@ export function Courses({
           {masterclasses.map((masterclass) => (
             <StaggerItem key={`masterclass-${masterclass.id}`}>
               <div className="group relative h-full">
-              <article className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-[4px_4px_10px_rgba(0,0,0,0.18),_10px_10px_30px_rgba(0,0,0,0.10)] transition-[transform,box-shadow] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5 group-hover:scale-[1.015] group-hover:shadow-[6px_6px_14px_rgba(0,0,0,0.22),_14px_14px_40px_rgba(0,0,0,0.14)]">
+              <article className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-all duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5 group-hover:scale-[1.015] group-hover:border-[#c9a84c] group-hover:shadow-card-hover">
                 <MediaPlaceholder
                   src={masterclass.imageUrl}
                   position={masterclass.imagePosition}

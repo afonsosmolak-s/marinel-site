@@ -90,28 +90,23 @@ export interface Lead {
   createdAt: string;
 }
 
-export const ORDER_FLAVOURS = [
-  "Chocolate",
-  "Vainilla",
-  "Limón",
-  "Naranja",
-  "Red Velvet",
-  "Zanahoria",
-] as const;
-export type OrderFlavour = (typeof ORDER_FLAVOURS)[number];
+// Los bizcochos (sabores) se gestionan desde el panel — /admin/bizcochos.
+export interface CakeFlavour {
+  id: string;
+  name: string;
+  imageUrl: string | null;
+  orderIndex: number;
+  published: boolean;
+}
 
-export const ORDER_FILLINGS = [
-  "Ganache de Chocolate",
-  "Pistacho",
-  "Oreo",
-  "Kinder Bueno",
-  "Dulce de leche",
-  "Nata",
-  "Mousse de Mango",
-  "Mousse de Maracuyá",
-  "Frutos del Bosque",
-] as const;
-export type OrderFilling = (typeof ORDER_FILLINGS)[number];
+// Los rellenos también se gestionan desde el panel — /admin/rellenos.
+export interface CakeFilling {
+  id: string;
+  name: string;
+  imageUrl: string | null;
+  orderIndex: number;
+  published: boolean;
+}
 
 // Los tamaños de tarta son gestionables desde el panel (nombre + medidas +
 // orden + visibilidad) — nunca hardcodeados. Ver /admin/tamanos.
@@ -153,8 +148,10 @@ export interface CakeOrder {
   // Nombre del estilo elegido (snapshot, igual que size) — los estilos
   // disponibles se gestionan en /admin/estilos.
   style: string;
-  flavour: OrderFlavour;
-  filling: OrderFilling;
+  // Nombre del bizcocho/relleno elegido (snapshot) — los disponibles se
+  // gestionan en /admin/bizcochos y /admin/rellenos.
+  flavour: string;
+  filling: string;
   // Nombre y medidas del tamaño elegido, guardados como snapshot en el
   // momento del pedido — si luego se edita/borra el tamaño en el panel, los
   // pedidos ya enviados no cambian.

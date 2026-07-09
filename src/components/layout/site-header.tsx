@@ -23,7 +23,6 @@ const NAV_LINKS = [
   { href: "/#galeria", label: "Galería" },
   { href: "/#tartas", label: "Tartas a Medida" },
   { href: "/#cursos", label: "Cursos" },
-  { href: "/#opiniones", label: "Opiniones" },
   { href: "/#contacto", label: "Contacto" },
 ];
 
@@ -47,18 +46,15 @@ export function SiteHeader({ whatsappUrl }: { whatsappUrl: string }) {
             : "border border-transparent bg-transparent",
         )}
       >
-        <Link href="/" className="flex flex-col items-center gap-0.5">
+        <Link href="/" className="flex items-center">
           <Image
             src="/logo.png"
             alt="Marinel Pastelería"
-            width={36}
-            height={36}
-            className="size-8 rounded-full object-cover"
+            width={52}
+            height={52}
+            className="size-12 rounded-full object-cover"
             priority
           />
-          <span className="font-heading text-[0.7rem] font-medium whitespace-nowrap text-foreground italic leading-none">
-            Tartas Marinel
-          </span>
         </Link>
 
         <nav className="hidden items-center justify-center gap-7 lg:flex">

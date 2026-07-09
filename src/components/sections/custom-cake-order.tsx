@@ -24,22 +24,20 @@ import { cakeOrderSchema } from "@/lib/validations/cake-order";
 import { buildCakeOrderWhatsAppUrl } from "@/lib/whatsapp-message";
 import { formatCakeDimensions, formatDate } from "@/lib/utils";
 import { cn } from "@/lib/utils";
-import {
-  ORDER_FILLINGS,
-  ORDER_FLAVOURS,
-  type CakeOccasion,
-  type CakeSize,
-  type CakeStyle,
-  type OrderFilling,
-  type OrderFlavour,
+import type {
+  CakeFilling,
+  CakeFlavour,
+  CakeOccasion,
+  CakeSize,
+  CakeStyle,
 } from "@/types/content";
 import type { CakeOrderFormValues } from "@/lib/validations/cake-order";
 
 interface FormState {
   occasion: string;
   style: string;
-  flavour: OrderFlavour | "";
-  filling: OrderFilling | "";
+  flavour: string;
+  filling: string;
   size: string;
   desiredDate: string;
   description: string;
@@ -125,7 +123,9 @@ function ProgressBar({ filled, total }: { filled: number; total: number }) {
     <div className="mb-10">
       <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
         <span>Tu configuración</span>
-        <span className="font-medium text-pink-ink">{filled}/{total} pasos</span>
+        <span className="font-medium text-pink-ink">
+          {filled >= total ? "Finalizar" : `${filled}/${total} pasos`}
+        </span>
       </div>
       <div className="h-1.5 w-full overflow-hidden rounded-full bg-border">
         <motion.div
@@ -144,13 +144,19 @@ function FormStep({
   label,
   children,
 }: {
-  index: string;
+  index?: string;
   label: string;
   children: React.ReactNode;
 }) {
   return (
     <div>
-      <SectionEyebrow index={index} label={label} className="mb-4" />
+      {index ? (
+        <SectionEyebrow index={index} label={label} className="mb-4" />
+      ) : (
+        <p className="mb-4 text-xs font-medium tracking-[0.2em] text-brown uppercase">
+          {label}
+        </p>
+      )}
       {children}
     </div>
   );
@@ -176,11 +182,15 @@ export function CustomCakeOrder({
   sizes,
   styles,
   occasions,
+  flavours,
+  fillings,
 }: {
   whatsappUrl: string;
   sizes: CakeSize[];
   styles: CakeStyle[];
   occasions: CakeOccasion[];
+  flavours: CakeFlavour[];
+  fillings: CakeFilling[];
 }) {
   const [submitted, setSubmitted] = useState(false);
   const [submittedValues, setSubmittedValues] =
@@ -269,6 +279,9 @@ export function CustomCakeOrder({
               </div>
             ) : (
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
+                <h3 className="form-title text-center font-heading text-2xl font-medium text-foreground italic md:text-3xl">
+                  Diseña tu tarta
+                </h3>
                 <ProgressBar
                   filled={[watched.occasion, watched.style, watched.flavour, watched.filling, watched.size].filter(Boolean).length}
                   total={5}
@@ -307,7 +320,7 @@ export function CustomCakeOrder({
                     name="flavour"
                     render={({ field }) => (
                       <OptionCards
-                        options={ORDER_FLAVOURS}
+                        options={flavours.map((flavour) => flavour.name)}
                         value={field.value}
                         onChange={field.onChange}
                       />
@@ -321,7 +334,7 @@ export function CustomCakeOrder({
                     name="filling"
                     render={({ field }) => (
                       <OptionCards
-                        options={ORDER_FILLINGS}
+                        options={fillings.map((filling) => filling.name)}
                         value={field.value}
                         onChange={field.onChange}
                       />
@@ -344,27 +357,34 @@ export function CustomCakeOrder({
                   />
                 </FormStep>
 
-                <FormStep index="06" label="Fecha deseada">
-                  <Input
-                    type="date"
-                    className="h-11 max-w-xs"
-                    {...register("desiredDate")}
-                  />
-                </FormStep>
-
-                <FormStep index="07" label="Cuéntanos tu idea">
-                  <Textarea
-                    rows={5}
-                    placeholder="Cuéntanos cómo imaginas tu tarta, los colores, el estilo, la temática o cualquier detalle importante."
-                    {...register("description")}
-                  />
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    Ejemplos: temática · colores · número aproximado de
-                    personas · decoración · cualquier detalle especial
+                {/* Etapa final "Finalizar" — fuera del contador de 5 pasos */}
+                <div className="space-y-8 rounded-2xl border border-border bg-warm/60 p-6 md:p-8">
+                  <p className="flex items-center gap-2 text-xs font-medium tracking-[0.2em] text-pink-ink uppercase">
+                    Finalizar
+                    <span aria-hidden className="h-px flex-1 bg-border" />
                   </p>
-                </FormStep>
 
-                <FormStep index="08" label="Tus datos">
+                  <FormStep label="Fecha deseada">
+                    <Input
+                      type="date"
+                      className="h-11 max-w-xs"
+                      {...register("desiredDate")}
+                    />
+                  </FormStep>
+
+                  <FormStep label="Cuéntanos tu idea">
+                    <Textarea
+                      rows={5}
+                      placeholder="Cuéntanos cómo imaginas tu tarta, los colores, el estilo, la temática o cualquier detalle importante."
+                      {...register("description")}
+                    />
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      Ejemplos: temática · colores · número aproximado de
+                      personas · decoración · cualquier detalle especial
+                    </p>
+                  </FormStep>
+
+                  <FormStep label="Tus datos">
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="flex flex-col gap-1.5 sm:col-span-2">
                       <Label htmlFor="cake-fullName">Nombre completo</Label>
@@ -387,7 +407,8 @@ export function CustomCakeOrder({
                       />
                     </div>
                   </div>
-                </FormStep>
+                  </FormStep>
+                </div>
 
                 {hasSummary && (
                   <div className="rounded-2xl border border-pink/30 bg-pink-tint/40 p-6">
@@ -423,9 +444,13 @@ export function CustomCakeOrder({
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn-sweep h-auto w-full rounded-full bg-primary px-8 py-4 text-base font-medium text-primary-foreground hover:bg-primary/85 sm:w-auto"
+                  className="btn-primary relative h-auto w-full overflow-hidden rounded-full bg-primary px-8 py-4 text-base font-medium text-primary-foreground transition-shadow duration-300 hover:bg-primary/85 hover:shadow-btn-gold sm:w-auto"
                 >
                   {isSubmitting ? "Enviando..." : "Solicitar presupuesto"}
+                  <span
+                    aria-hidden
+                    className="btn-shimmer pointer-events-none absolute inset-y-0 w-[60%] bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                  />
                 </Button>
               </form>
             )}

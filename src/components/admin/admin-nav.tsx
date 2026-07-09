@@ -6,8 +6,10 @@ import {
   LayoutDashboard,
   BookOpen,
   CalendarDays,
+  Cake,
   CakeSlice,
   Images,
+  Layers,
   Quote,
   Inbox,
   Palette,
@@ -41,6 +43,8 @@ const NAV_GROUPS = [
       { href: "/admin/ocasiones", label: "Ocasiones", icon: PartyPopper },
       { href: "/admin/tamanos", label: "Tamaños", icon: Ruler },
       { href: "/admin/estilos", label: "Estilos", icon: Palette },
+      { href: "/admin/bizcochos", label: "Bizcochos", icon: Cake },
+      { href: "/admin/rellenos", label: "Rellenos", icon: Layers },
       { href: "/admin/formularios", label: "Formularios", icon: Inbox },
       { href: "/admin/configuracion", label: "Configuración", icon: Settings },
     ],
@@ -56,7 +60,7 @@ export function AdminNav({ onNavigate }: { onNavigate?: () => void }) {
         href="/admin/dashboard"
         className="px-2 font-heading text-xl text-foreground italic"
       >
-        Marinel
+        Gestión Marinel
       </Link>
 
       <nav className="mt-8 flex-1 space-y-6">

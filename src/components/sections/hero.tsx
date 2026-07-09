@@ -2,14 +2,16 @@ import { Container } from "@/components/layout/container";
 import { MediaPlaceholder } from "@/components/media-placeholder";
 import { LinkButton } from "@/components/ui/link-button";
 import { Reveal } from "@/components/motion/reveal";
+import { HeroParticles } from "@/components/motion/hero-particles";
 import type { SiteSettings } from "@/types/content";
 
 export function Hero({ settings }: { settings: SiteSettings }) {
   return (
     <section
       id="top"
-      className="relative overflow-hidden pt-36 pb-20 md:pt-48 md:pb-28"
+      className="hero-section relative overflow-hidden bg-gradient-to-br from-[#fff8f8] via-[#fdfaf7] to-white pt-36 pb-20 md:pt-48 md:pb-28"
     >
+      <HeroParticles />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -37,17 +39,20 @@ export function Hero({ settings }: { settings: SiteSettings }) {
             <div className="mt-10 flex flex-wrap gap-4">
               <LinkButton
                 href="#cursos"
-                className="btn-sweep h-auto rounded-full bg-primary px-7 py-3.5 text-base text-primary-foreground hover:bg-primary/85"
+                className="btn-primary relative h-auto overflow-hidden rounded-full bg-primary px-7 py-3.5 text-base text-primary-foreground transition-shadow duration-300 hover:bg-primary/85 hover:shadow-btn-gold"
               >
                 Descubre los cursos
+                <span
+                  aria-hidden
+                  className="btn-shimmer pointer-events-none absolute inset-y-0 w-[60%] bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                />
               </LinkButton>
               <LinkButton
-                href={settings.whatsappUrl}
-                external
+                href="#tartas"
                 variant="outline"
-                className="h-auto rounded-full px-7 py-3.5 text-base hover:bg-pink-tint hover:text-pink-ink"
+                className="h-auto rounded-full border border-[#c9a84c] bg-transparent px-6 py-3 text-base text-[#c9a84c] transition-colors duration-300 hover:bg-[#c9a84c]/10 hover:text-[#c9a84c]"
               >
-                Hablar por WhatsApp
+                Encarga tu tarta
               </LinkButton>
             </div>
           </Reveal>

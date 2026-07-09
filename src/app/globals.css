@@ -57,6 +57,10 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  /* Sombras con color de marca (rosa/dorado) */
+  --shadow-card: 0 4px 24px rgba(232, 160, 176, 0.15);
+  --shadow-card-hover: 0 8px 32px rgba(232, 160, 176, 0.25);
+  --shadow-btn-gold: 0 4px 16px rgba(201, 168, 76, 0.25);
 }
 
 :root {
@@ -64,7 +68,8 @@
      rosa pastel reservado para acentos/highlights, marrón cálido muy sutil para
      detalles finos. El rosa NUNCA se usa como relleno grande de superficie —
      solo en badges, palabras en cursiva, focos de hover. Ver ARCHITECTURE.md. */
-  --background: #FFFEFD;
+  /* Blanco crema cálido (antes #FFFEFD puro) — elimina el efecto "flat" */
+  --background: #fdfaf7;
   --foreground: #222222;
   --card: #FEFBFB;
   --card-foreground: #222222;

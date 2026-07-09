@@ -93,6 +93,9 @@ export function Contact({
 
           <Reveal delay={0.1}>
             <div className="rounded-3xl border border-border bg-background p-6 md:p-10">
+              <h3 className="form-title mb-8 text-center font-heading text-2xl font-medium text-foreground italic md:text-3xl">
+                Reserva tu plaza
+              </h3>
               <LeadForm
                 courses={courses}
                 masterclasses={masterclasses}

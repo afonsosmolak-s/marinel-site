@@ -1,11 +1,10 @@
 import { z } from "zod";
-import { ORDER_FILLINGS, ORDER_FLAVOURS } from "@/types/content";
 
 export const cakeOrderSchema = z.object({
   occasion: z.string().min(1, "Selecciona una ocasión."),
   style: z.string().min(1, "Selecciona un estilo."),
-  flavour: z.enum(ORDER_FLAVOURS, { message: "Selecciona un bizcocho." }),
-  filling: z.enum(ORDER_FILLINGS, { message: "Selecciona un relleno." }),
+  flavour: z.string().min(1, "Selecciona un bizcocho."),
+  filling: z.string().min(1, "Selecciona un relleno."),
   size: z.string().min(1, "Selecciona un tamaño."),
   sizeDimensions: z.string().min(1, "Selecciona un tamaño."),
   desiredDate: z.string().min(1, "Selecciona una fecha."),

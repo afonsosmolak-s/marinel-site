@@ -33,7 +33,7 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
               <div className="group relative">
                 <Link
                   href={`/galeria?foto=${image.id}`}
-                  className="relative block w-full text-left transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5"
+                  className="gallery-card relative block w-full overflow-hidden rounded-3xl border border-transparent text-left shadow-[0_2px_8px_rgba(0,0,0,0.05)] transition-[border-color,transform] duration-300 group-hover:-translate-y-1.5 hover:border-[#c9a84c]"
                   aria-label={image.caption ?? "Ver fotografía"}
                 >
                   <MediaPlaceholder
@@ -42,8 +42,11 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
                     alt={image.caption ?? "Fotografía de Marinel Pastelería"}
                     ratio="tall"
                     sizes="(min-width: 1024px) 25vw, 50vw"
-                    className="shadow-[4px_4px_10px_rgba(0,0,0,0.18),_10px_10px_30px_rgba(0,0,0,0.10)] transition-all duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:shadow-[6px_6px_14px_rgba(0,0,0,0.22),_14px_14px_40px_rgba(0,0,0,0.14)]"
-                    imageClassName="brightness-[0.68] transition-all duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] group-hover:brightness-[1.07] group-hover:saturate-[1.03]"
+                    imageClassName="brightness-[0.68] transition-[filter] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:brightness-[1.07] group-hover:saturate-[1.03]"
+                  />
+                  <span
+                    aria-hidden
+                    className="card-overlay pointer-events-none absolute inset-0 z-10 bg-[#c9a84c]/[0.08] opacity-0"
                   />
                 </Link>
                 {image.featured && (

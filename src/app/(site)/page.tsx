@@ -17,6 +17,9 @@ import { getPublishedTestimonials } from "@/services/testimonials";
 import { getPublishedCakeSizes } from "@/services/cake-sizes";
 import { getPublishedCakeStyles } from "@/services/cake-styles";
 import { getPublishedCakeOccasions } from "@/services/cake-occasions";
+import { getPublishedCakeFlavours } from "@/services/cake-flavours";
+import { getPublishedCakeFillings } from "@/services/cake-fillings";
+import { GsapEffects } from "@/components/motion/gsap-effects";
 
 export default async function HomePage({
   searchParams,
@@ -32,6 +35,8 @@ export default async function HomePage({
     cakeSizes,
     cakeStyles,
     cakeOccasions,
+    cakeFlavours,
+    cakeFillings,
     params,
   ] = await Promise.all([
     getSiteSettings(),
@@ -42,6 +47,8 @@ export default async function HomePage({
     getPublishedCakeSizes(),
     getPublishedCakeStyles(),
     getPublishedCakeOccasions(),
+    getPublishedCakeFlavours(),
+    getPublishedCakeFillings(),
     searchParams,
   ]);
 
@@ -57,6 +64,8 @@ export default async function HomePage({
           sizes={cakeSizes}
           styles={cakeStyles}
           occasions={cakeOccasions}
+          flavours={cakeFlavours}
+          fillings={cakeFillings}
         />
         <Courses courses={courses} masterclasses={masterclasses} />
         <Testimonials testimonials={testimonials} />
@@ -70,6 +79,7 @@ export default async function HomePage({
         <BrandValues />
       </main>
       <SiteFooter settings={settings} />
+      <GsapEffects />
     </>
   );
 }
