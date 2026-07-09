@@ -5,6 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { submitLead } from "@/app/actions/lead";
+import { buildLeadWhatsAppUrl } from "@/lib/whatsapp-message";
 import {
   EXPERIENCE_LEVELS,
   leadSchema,
@@ -29,12 +30,15 @@ export function LeadForm({
   courses,
   masterclasses,
   defaultCourse,
+  whatsappUrl,
 }: {
   courses: Course[];
   masterclasses: Masterclass[];
   defaultCourse?: string;
+  whatsappUrl: string;
 }) {
   const [submitted, setSubmitted] = useState(false);
+  const [whatsappHref, setWhatsappHref] = useState<string | null>(null);
   const {
     register,
     control,
@@ -61,6 +65,11 @@ export function LeadForm({
       toast.success(
         "¡Gracias! Marinel revisará tu solicitud y te contactará muy pronto.",
       );
+      // Abre WhatsApp en una pestaña nueva con un mensaje ya redactado —
+      // misma pauta que el formulario de tartas.
+      const href = buildLeadWhatsAppUrl(whatsappUrl, values);
+      setWhatsappHref(href);
+      window.open(href, "_blank", "noopener,noreferrer");
       reset();
       setSubmitted(true);
     } else {
@@ -72,19 +81,32 @@ export function LeadForm({
     return (
       <div className="rounded-3xl border border-border bg-warm p-10 text-center">
         <p className="font-heading text-2xl text-foreground italic">
-          Solicitud enviada
+          ¡Solicitud enviada!
         </p>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          Marinel revisará tu nivel y objetivo, y te escribirá por WhatsApp o
-          email para confirmar los detalles y la forma de pago.
+          Hemos abierto WhatsApp con un mensaje listo para Marinel — envíalo
+          para reservar tu plaza más rápido. Si no se abrió, usa el botón de
+          abajo.
         </p>
-        <Button
-          variant="outline"
-          className="mt-6 h-auto rounded-full px-6 py-2.5"
-          onClick={() => setSubmitted(false)}
-        >
-          Enviar otra solicitud
-        </Button>
+        <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          {whatsappHref && (
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-auto items-center rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/85"
+            >
+              Abrir WhatsApp
+            </a>
+          )}
+          <Button
+            variant="outline"
+            className="h-auto rounded-full px-6 py-2.5"
+            onClick={() => setSubmitted(false)}
+          >
+            Enviar otra solicitud
+          </Button>
+        </div>
       </div>
     );
   }

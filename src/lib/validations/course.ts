@@ -5,7 +5,7 @@ export const courseSchema = z.object({
   title: z.string().min(2, "El título es obligatorio."),
   description: z.string().min(10, "Añade una descripción más completa."),
   level: z.enum(["Iniciación", "Intermedio", "Avanzado"]),
-  format: z.enum(["Presencial", "Online"]),
+  format: z.enum(["Presencial", "Online", "Ebook"]),
   imageUrl: z.string().nullable(),
   imagePosition: imagePositionSchema.nullable(),
   startDate: z.string().nullable(),
@@ -13,6 +13,7 @@ export const courseSchema = z.object({
   duration: z.string().nullable(),
   badge: z.string().nullable(),
   price: z.string().nullable(),
+  checkoutUrl: z.string().nullable(),
   featured: z.boolean(),
   published: z.boolean(),
 });

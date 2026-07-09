@@ -118,15 +118,32 @@ export function Courses({
                     </div>
                   )}
 
-                  <Link
-                    href={`/?curso=${encodeURIComponent(course.title)}#contacto`}
-                    className={cn(
-                      buttonVariants({ variant: "outline" }),
-                      "mt-6 h-auto w-fit rounded-full px-5 py-2.5 hover:bg-pink-tint hover:text-pink-ink",
-                    )}
-                  >
-                    Quiero este curso
-                  </Link>
+                  {/* Ebooks con enlace de checkout compran directo en la
+                      plataforma externa (Hotmart); el resto sigue el flujo
+                      de contacto personal. */}
+                  {course.format === "Ebook" && course.checkoutUrl ? (
+                    <a
+                      href={course.checkoutUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(
+                        buttonVariants(),
+                        "mt-6 h-auto w-fit rounded-full bg-primary px-5 py-2.5 text-primary-foreground transition-shadow duration-300 hover:bg-primary/85 hover:shadow-btn-gold",
+                      )}
+                    >
+                      Comprar ebook
+                    </a>
+                  ) : (
+                    <Link
+                      href={`/?curso=${encodeURIComponent(course.title)}#contacto`}
+                      className={cn(
+                        buttonVariants({ variant: "outline" }),
+                        "mt-6 h-auto w-fit rounded-full px-5 py-2.5 hover:bg-pink-tint hover:text-pink-ink",
+                      )}
+                    >
+                      Quiero este curso
+                    </Link>
+                  )}
                 </div>
               </article>
               </div>

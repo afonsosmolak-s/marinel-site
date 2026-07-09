@@ -62,3 +62,42 @@ export function buildWhatsAppChatUrl(phone: string): string {
   const digits = phone.replace(/\D/g, "");
   return `https://wa.me/${digits}`;
 }
+
+// Mensaje del formulario de cursos — tono cercano, la alumna se presenta.
+export function buildLeadWhatsAppMessage(values: {
+  fullName: string;
+  courseInterest: string;
+  experienceLevel: string;
+  goal?: string | null;
+}): string {
+  const firstName = values.fullName.trim().split(" ")[0];
+  const lines = [
+    `¡Hola Marinel! 👋 Soy ${firstName}.`,
+    "",
+    `Acabo de enviar mi solicitud desde la web — me interesa *${values.courseInterest}* 🎂`,
+    "",
+    `Mi nivel: ${values.experienceLevel}`,
+  ];
+  if (values.goal && values.goal.trim() !== "") {
+    lines.push(`Mi objetivo: ${values.goal}`);
+  }
+  lines.push(
+    "",
+    "¿Me cuentas los próximos pasos para reservar mi plaza? ✨",
+  );
+  return lines.join("\n");
+}
+
+export function buildLeadWhatsAppUrl(
+  whatsappUrl: string,
+  values: {
+    fullName: string;
+    courseInterest: string;
+    experienceLevel: string;
+    goal?: string | null;
+  },
+): string {
+  const message = buildLeadWhatsAppMessage(values);
+  const separator = whatsappUrl.includes("?") ? "&" : "?";
+  return `${whatsappUrl}${separator}text=${encodeURIComponent(message)}`;
+}

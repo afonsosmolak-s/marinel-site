@@ -47,6 +47,7 @@ export function CourseForm({ course }: { course?: Course }) {
       duration: course?.duration ?? null,
       badge: course?.badge ?? null,
       price: course?.price ?? null,
+      checkoutUrl: course?.checkoutUrl ?? null,
       featured: course?.featured ?? false,
       published: course?.published ?? true,
     },
@@ -54,6 +55,7 @@ export function CourseForm({ course }: { course?: Course }) {
 
   const imageUrl = watch("imageUrl");
   const imagePosition = watch("imagePosition");
+  const format = watch("format");
 
   async function onSubmit(values: CourseFormValues) {
     const result = course
@@ -125,6 +127,7 @@ export function CourseForm({ course }: { course?: Course }) {
                   <SelectContent>
                     <SelectItem value="Presencial">Presencial</SelectItem>
                     <SelectItem value="Online">Online</SelectItem>
+                    <SelectItem value="Ebook">Ebook</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -236,6 +239,34 @@ export function CourseForm({ course }: { course?: Course }) {
             )}
           />
         </div>
+
+        {/* Solo para ebooks: enlace de pago externo (Hotmart u otra
+            plataforma). Los cursos presenciales/online no tienen pago
+            online — flujo de contacto personal. */}
+        {format === "Ebook" && (
+          <div className="flex flex-col gap-1.5 rounded-2xl border border-[#c9a84c]/50 bg-[#c9a84c]/5 p-4">
+            <Label htmlFor="checkoutUrl">Enlace de checkout (Hotmart)</Label>
+            <Controller
+              control={control}
+              name="checkoutUrl"
+              render={({ field }) => (
+                <Input
+                  id="checkoutUrl"
+                  type="url"
+                  placeholder="https://pay.hotmart.com/..."
+                  value={field.value ?? ""}
+                  onChange={(event) =>
+                    field.onChange(event.target.value || null)
+                  }
+                />
+              )}
+            />
+            <p className="text-xs text-muted-foreground">
+              El botón «Comprar ebook» del sitio llevará a este enlace. Pega
+              aquí la URL de pago de tu plataforma.
+            </p>
+          </div>
+        )}
 
         <div className="flex items-center gap-3 rounded-2xl border border-border p-4">
           <Controller

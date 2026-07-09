@@ -100,6 +100,7 @@ export function Contact({
                 courses={courses}
                 masterclasses={masterclasses}
                 defaultCourse={defaultCourse}
+                whatsappUrl={settings.whatsappUrl}
               />
             </div>
           </Reveal>

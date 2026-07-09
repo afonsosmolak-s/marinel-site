@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Cake,
   CalendarDays,
+  Clock,
   Palette,
   Ruler,
   Utensils,
@@ -44,6 +45,13 @@ interface FormState {
   fullName: string;
   phone: string;
   email: string;
+}
+
+// Fecha mínima seleccionable: hoy + 48 horas (aviso de antelación).
+function minOrderDate(): string {
+  const date = new Date();
+  date.setDate(date.getDate() + 2);
+  return date.toISOString().slice(0, 10);
 }
 
 const DEFAULT_VALUES: FormState = {
@@ -282,6 +290,23 @@ export function CustomCakeOrder({
                 <h3 className="form-title text-center font-heading text-2xl font-medium text-foreground italic md:text-3xl">
                   Diseña tu tarta
                 </h3>
+
+                {/* Aviso de antelación — cada tarta se prepara artesanalmente */}
+                <div className="flex items-start gap-3 rounded-2xl border border-[#c9a84c]/40 bg-[#c9a84c]/[0.06] px-5 py-4">
+                  <Clock
+                    className="mt-0.5 size-4 shrink-0 text-[#b08a3a]"
+                    strokeWidth={1.5}
+                  />
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    <span className="font-medium text-foreground">
+                      Haz tu pedido con al menos 48 horas de antelación.
+                    </span>{" "}
+                    Cada tarta se prepara de forma artesanal — las tartas de
+                    varios pisos o con mucho detalle pueden necesitar más
+                    tiempo.
+                  </p>
+                </div>
+
                 <ProgressBar
                   filled={[watched.occasion, watched.style, watched.flavour, watched.filling, watched.size].filter(Boolean).length}
                   total={5}
@@ -365,11 +390,16 @@ export function CustomCakeOrder({
                   </p>
 
                   <FormStep label="Fecha deseada">
+                    {/* min = hoy + 48h — coherente con el aviso de antelación */}
                     <Input
                       type="date"
+                      min={minOrderDate()}
                       className="h-11 max-w-xs"
                       {...register("desiredDate")}
                     />
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      Mínimo 48 horas de antelación.
+                    </p>
                   </FormStep>
 
                   <FormStep label="Cuéntanos tu idea">

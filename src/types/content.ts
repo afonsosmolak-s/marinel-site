@@ -1,5 +1,5 @@
 export type CourseLevel = "Iniciación" | "Intermedio" | "Avanzado";
-export type CourseFormat = "Presencial" | "Online";
+export type CourseFormat = "Presencial" | "Online" | "Ebook";
 
 // Encuadre de una imagen — punto focal (drag) + zoom, aplicado en pantalla
 // vía object-position + transform scale. Null = encuadre por defecto (centro).
@@ -34,6 +34,10 @@ export interface Course {
   duration: string | null; // texto libre — "5 horas", "3 semanas"...
   badge: string | null; // insignia opcional, p. ej. "Nuevo"
   price: string | null; // texto libre — sin pago online, ver CLIENT_CONTEXT.md
+  // Enlace de checkout externo (Hotmart u otra plataforma) — SOLO se muestra
+  // en el sitio cuando format === "Ebook"; los cursos presenciales/online
+  // siguen el flujo de contacto personal (sin pago online).
+  checkoutUrl: string | null;
   featured: boolean;
   orderIndex: number;
   published: boolean;

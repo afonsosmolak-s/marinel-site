@@ -24,6 +24,7 @@ type Row = {
   duration: string | null;
   badge: string | null;
   price: string | null;
+  checkout_url: string | null;
   featured: boolean;
   order_index: number;
   published: boolean;
@@ -44,6 +45,7 @@ function toModel(row: Row): Course {
     duration: row.duration,
     badge: row.badge,
     price: row.price,
+    checkoutUrl: row.checkout_url,
     featured: row.featured,
     orderIndex: row.order_index,
     published: row.published,
@@ -64,6 +66,7 @@ function toRow(input: CourseInput, extra?: { slug?: string; order_index?: number
     duration: input.duration,
     badge: input.badge,
     price: input.price,
+    checkout_url: input.checkoutUrl,
     featured: input.featured,
     published: input.published,
     ...(extra?.order_index !== undefined ? { order_index: extra.order_index } : {}),
