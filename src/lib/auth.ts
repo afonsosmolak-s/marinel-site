@@ -2,9 +2,15 @@ import { createHmac, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
 
 const COOKIE_NAME = "marinel_admin_session";
-const SESSION_SECRET =
-  process.env.ADMIN_SESSION_SECRET ?? "dev-only-insecure-secret-change-me";
 const MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
+
+// Strip BOM, stray quotes and whitespace that sneak in via dashboard copy-paste.
+function cleanEnv(value: string | undefined): string {
+  return (value ?? "").trim().replace(/^["']+|["']+$/g, "").trim();
+}
+
+const SESSION_SECRET =
+  cleanEnv(process.env.ADMIN_SESSION_SECRET) || "dev-only-insecure-secret-change-me";
 
 function sign(value: string): string {
   return createHmac("sha256", SESSION_SECRET).update(value).digest("hex");
@@ -18,9 +24,9 @@ function safeEqual(a: string, b: string): boolean {
 }
 
 export function verifyPassword(password: string): boolean {
-  const expected = process.env.ADMIN_PASSWORD ?? "";
+  const expected = cleanEnv(process.env.ADMIN_PASSWORD);
   if (!expected || !password) return false;
-  return safeEqual(password, expected);
+  return safeEqual(password.trim(), expected);
 }
 
 // In production (Vercel), update ADMIN_PASSWORD through the Vercel dashboard.
