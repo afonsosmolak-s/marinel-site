@@ -1,7 +1,7 @@
 // Dominio aún no registrado — placeholder hasta que la clienta elija uno y
 // Smolak Studio configure el dominio definitivo en producción.
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://marinelpasteleria.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://marinelpasteleria.com";
 
 // Las imágenes hoy vienen de /public/uploads (ruta relativa); en el futuro
 // (go-live) pueden venir de Supabase Storage (URL ya absoluta).

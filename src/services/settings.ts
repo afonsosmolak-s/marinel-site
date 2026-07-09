@@ -83,14 +83,18 @@ const DEFAULT_SETTINGS: SiteSettings = {
 };
 
 export async function getSiteSettings(): Promise<SiteSettings> {
-  const supabase = createPublicClient();
-  const { data, error } = await supabase
-    .from("site_settings")
-    .select("*")
-    .eq("id", 1)
-    .single();
-  if (error || !data) return DEFAULT_SETTINGS;
-  return toModel(data as Row);
+  try {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase
+      .from("site_settings")
+      .select("*")
+      .eq("id", 1)
+      .single();
+    if (error || !data) return DEFAULT_SETTINGS;
+    return toModel(data as Row);
+  } catch {
+    return DEFAULT_SETTINGS;
+  }
 }
 
 export async function updateSiteSettings(input: Partial<SiteSettings>): Promise<SiteSettings> {
