@@ -114,12 +114,8 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
       </Container>
 
       <div className="border-t border-border">
-        <Container className="flex flex-col items-center justify-between gap-2 py-6 text-xs text-muted-foreground md:flex-row">
+        <Container className="flex flex-col items-center justify-center gap-2 py-6 text-xs text-muted-foreground md:flex-row">
           <p>© {new Date().getFullYear()} Marinel Pastelería</p>
-          <p>
-            Hecho por{" "}
-            <span className="font-medium text-foreground">Smolak & Co.</span>
-          </p>
         </Container>
       </div>
     </footer>
