@@ -1,6 +1,25 @@
 import { z } from "zod";
 import { imagePositionSchema } from "@/lib/validations/image-position";
 
+// Acepta vacío o un URL http(s). Bloquea esquemas peligrosos (javascript:,
+// data:, etc.) que, en un href o en el src del iframe del mapa, serían un
+// vector de XSS. Solo la admin puede editar estos campos, pero es defensa extra.
+const safeUrl = z
+  .string()
+  .trim()
+  .refine(
+    (value) => {
+      if (value === "") return true;
+      try {
+        const protocol = new URL(value).protocol;
+        return protocol === "https:" || protocol === "http:";
+      } catch {
+        return false;
+      }
+    },
+    { message: "Debe ser un enlace válido (http:// o https://)." },
+  );
+
 export const siteSettingsSchema = z.object({
   heroEyebrow: z.string(),
   heroTitle: z.string(),
@@ -13,16 +32,16 @@ export const siteSettingsSchema = z.object({
   aboutBody: z.array(z.string()),
   aboutImageUrl: z.string().nullable(),
   aboutImagePosition: imagePositionSchema.nullable(),
-  instagramUrl: z.string(),
-  tiktokUrl: z.string(),
-  whatsappUrl: z.string(),
+  instagramUrl: safeUrl,
+  tiktokUrl: safeUrl,
+  whatsappUrl: safeUrl,
   whatsappNumber: z.string(),
-  communityUrl: z.string(),
+  communityUrl: safeUrl,
   phone: z.string(),
   email: z.string(),
   city: z.string(),
   address: z.string(),
-  mapEmbedUrl: z.string(),
+  mapEmbedUrl: safeUrl,
   seoTitle: z.string(),
   seoDescription: z.string(),
   legalHolderName: z.string(),
