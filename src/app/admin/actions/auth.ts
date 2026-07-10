@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import {
   createSession,
   destroySession,
+  requireAdmin,
   updateAdminPassword,
   verifyPassword,
 } from "@/lib/auth";
@@ -12,6 +13,7 @@ import { changePasswordSchema } from "@/lib/validations/admin-password";
 export async function changePasswordAction(
   input: unknown,
 ): Promise<{ success: true } | { success: false; error: string }> {
+  await requireAdmin();
   const parsed = changePasswordSchema.safeParse(input);
   if (!parsed.success) {
     return {

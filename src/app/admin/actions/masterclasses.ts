@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth";
 import { masterclassSchema } from "@/lib/validations/masterclass";
 import * as masterclassesService from "@/services/masterclasses";
 
@@ -12,6 +13,7 @@ function revalidate() {
 export async function createMasterclassAction(
   input: unknown,
 ): Promise<{ success: true } | { success: false; error: string }> {
+  await requireAdmin();
   const parsed = masterclassSchema.safeParse(input);
   if (!parsed.success) {
     return { success: false, error: "Revisa los datos de la masterclass." };
@@ -25,6 +27,7 @@ export async function updateMasterclassAction(
   id: string,
   input: unknown,
 ): Promise<{ success: true } | { success: false; error: string }> {
+  await requireAdmin();
   const parsed = masterclassSchema.safeParse(input);
   if (!parsed.success) {
     return { success: false, error: "Revisa los datos de la masterclass." };
@@ -35,6 +38,7 @@ export async function updateMasterclassAction(
 }
 
 export async function deleteMasterclassAction(id: string): Promise<void> {
+  await requireAdmin();
   await masterclassesService.deleteMasterclass(id);
   revalidate();
 }
@@ -42,6 +46,7 @@ export async function deleteMasterclassAction(id: string): Promise<void> {
 export async function toggleMasterclassPublishedAction(
   id: string,
 ): Promise<void> {
+  await requireAdmin();
   await masterclassesService.toggleMasterclassPublished(id);
   revalidate();
 }

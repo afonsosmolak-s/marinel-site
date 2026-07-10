@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth";
 import { testimonialSchema } from "@/lib/validations/testimonial";
 import * as testimonialsService from "@/services/testimonials";
 
@@ -12,6 +13,7 @@ function revalidate() {
 export async function createTestimonialAction(
   input: unknown,
 ): Promise<{ success: true } | { success: false; error: string }> {
+  await requireAdmin();
   const parsed = testimonialSchema.safeParse(input);
   if (!parsed.success) {
     return { success: false, error: "Revisa los datos del testimonio." };
@@ -25,6 +27,7 @@ export async function updateTestimonialAction(
   id: string,
   input: unknown,
 ): Promise<{ success: true } | { success: false; error: string }> {
+  await requireAdmin();
   const parsed = testimonialSchema.safeParse(input);
   if (!parsed.success) {
     return { success: false, error: "Revisa los datos del testimonio." };
@@ -35,6 +38,7 @@ export async function updateTestimonialAction(
 }
 
 export async function deleteTestimonialAction(id: string): Promise<void> {
+  await requireAdmin();
   await testimonialsService.deleteTestimonial(id);
   revalidate();
 }
@@ -42,6 +46,7 @@ export async function deleteTestimonialAction(id: string): Promise<void> {
 export async function toggleTestimonialPublishedAction(
   id: string,
 ): Promise<void> {
+  await requireAdmin();
   await testimonialsService.toggleTestimonialPublished(id);
   revalidate();
 }

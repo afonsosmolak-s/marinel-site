@@ -58,5 +58,18 @@ export async function isAuthenticated(): Promise<boolean> {
   if (!raw) return false;
   const [issuedAt, signature] = raw.split(".");
   if (!issuedAt || !signature) return false;
-  return safeEqual(signature, sign(issuedAt));
+  if (!safeEqual(signature, sign(issuedAt))) return false;
+  // Reject sessions older than MAX_AGE even if the cookie value was copied
+  // elsewhere: the signature alone stays valid forever, the timestamp does not.
+  const age = Date.now() - Number(issuedAt);
+  return Number.isFinite(age) && age >= 0 && age <= MAX_AGE_SECONDS * 1000;
+}
+
+// Guard for admin-only Server Actions. Server Actions are public POST endpoints
+// (their IDs ship in the client bundle), so the layout redirect is NOT enough —
+// every mutating action must verify the session itself.
+export async function requireAdmin(): Promise<void> {
+  if (!(await isAuthenticated())) {
+    throw new Error("No autorizado.");
+  }
 }

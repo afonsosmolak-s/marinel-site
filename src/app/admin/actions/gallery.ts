@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth";
 import { galleryImageSchema } from "@/lib/validations/gallery";
 import * as galleryService from "@/services/gallery";
 
@@ -12,6 +13,7 @@ function revalidate() {
 export async function createGalleryImageAction(
   input: unknown,
 ): Promise<{ success: true } | { success: false; error: string }> {
+  await requireAdmin();
   const parsed = galleryImageSchema.safeParse(input);
   if (!parsed.success) {
     return { success: false, error: "Revisa los datos de la imagen." };
@@ -25,6 +27,7 @@ export async function updateGalleryImageAction(
   id: string,
   input: unknown,
 ): Promise<{ success: true } | { success: false; error: string }> {
+  await requireAdmin();
   const parsed = galleryImageSchema.safeParse(input);
   if (!parsed.success) {
     return { success: false, error: "Revisa los datos de la imagen." };
@@ -35,6 +38,7 @@ export async function updateGalleryImageAction(
 }
 
 export async function deleteGalleryImageAction(id: string): Promise<void> {
+  await requireAdmin();
   await galleryService.deleteGalleryImage(id);
   revalidate();
 }
@@ -42,6 +46,7 @@ export async function deleteGalleryImageAction(id: string): Promise<void> {
 export async function toggleGalleryImagePublishedAction(
   id: string,
 ): Promise<void> {
+  await requireAdmin();
   await galleryService.toggleGalleryImagePublished(id);
   revalidate();
 }
@@ -49,6 +54,7 @@ export async function toggleGalleryImagePublishedAction(
 export async function reorderGalleryImagesAction(
   orderedIds: string[],
 ): Promise<void> {
+  await requireAdmin();
   await galleryService.reorderGalleryImages(orderedIds);
   revalidate();
 }

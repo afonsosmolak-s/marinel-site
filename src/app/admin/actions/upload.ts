@@ -1,6 +1,7 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/auth";
 import path from "path";
 
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;
@@ -10,6 +11,7 @@ export async function uploadImage(
   formData: FormData,
   folder: string,
 ): Promise<{ url: string } | { error: string }> {
+  await requireAdmin();
   const file = formData.get("file");
   if (!(file instanceof File)) {
     return { error: "Archivo inválido." };
